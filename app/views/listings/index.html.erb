@@ -1,0 +1,8 @@
+<h1>Lists of accomodations</h1>
+<%if @listings.any?%>
+	<% @listings.each do |listing|%>
+	<%= listing.title %>
+	<%end%>
+<%else%>
+	<p>No listings found.</p>
+<%end%>
