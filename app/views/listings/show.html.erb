@@ -1,5 +1,13 @@
 <h1>Selected Listing</h1>
 <h3>Title: <%= @listing.title%></h3>
+<p><%= @listing.description%></p>
+<p><%= @listing.property_type%></p>
+<p><%= @listing.location%></p>
+<p><%= @listing.price%></p>
+<p><%= @listing.rooms%></p>
+<p><%= @listing.capacity%></p>
+<p><%= @listing.available%></p>
+
 <%if current_user == @listing.user%>
 	<%= link_to 'Edit', edit_listing_path(@listing)%><br>
 	<%= link_to 'Delete Listing', listing_path(@listing),

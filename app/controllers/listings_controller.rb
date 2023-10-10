@@ -1,4 +1,6 @@
 class ListingsController < ApplicationController
+	before_action :set_listing, only: [:show, :edit, :update, :destroy]
+
 	def index
 		@listings = Listing.all
 	end
@@ -8,7 +10,7 @@ class ListingsController < ApplicationController
 	end
 
 	def create
-		@listing = current_user.listings.create(title: params[:listing][:title])
+		@listing = current_user.listings.create(listing_params)
 		if @listing.save
 			redirect_to listings_path(@listings)
 		else
@@ -17,16 +19,13 @@ class ListingsController < ApplicationController
 	end
 
 	def show
-		@listing = Listing.find(params[:id])
 	end
 
 	def edit
-		@listing = Listing.find(params[:id])
 	end
 
 	def update
-		@listing = Listing.find(params[:id])
-		@listing.update(title: params[:listing][:title])
+		@listing.update(listing_params)
 		if @listing.save
 			redirect_to listing_path(@listing)
 		else
@@ -34,9 +33,17 @@ class ListingsController < ApplicationController
 		end
 	end
 
-	def destroy
-		@listing = Listing.find(params[:id])
+	def destroy		
 		@listing.destroy
 		redirect_to listings_path(@listings)
+	end
+
+	private
+		def set_listing
+			@listing = Listing.find(params[:id])
+		end
+
+	def listing_params
+		params.require(:listing).permit(:title, :description, :property_type, :location, :price, :rooms, :capacity, :available)
 	end
 end

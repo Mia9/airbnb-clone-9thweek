@@ -1,8 +1,3 @@
 <h1>Create new listing</h1><br>
-
-<%= form_with model: @listing do |f|%>
-<%= f.label :title%>
-<%= f.text_field :title%>
-<%= f.submit 'Create'%>
-<%end%>
+<%= render 'listing_form'%>
 <a href="/">Home</a>

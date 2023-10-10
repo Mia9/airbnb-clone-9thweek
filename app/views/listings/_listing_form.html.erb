@@ -2,18 +2,28 @@
 	<%= f.label :title %>
 	<%= f.text_field :title%>
 	<br>
+	<%= f.label :description%>
+	<%= f.text_field :description%>
+	<br>
 	<%= f.label :property_type%>
 	<%= f.text_field :property_type%>
 	<br>
 	<%= f.label :location%>
-	<%= f.text_field :location%>
+	<%= f.text_field :location%>	
 	<br>
-	<%= f.label :description%>
-	<%= f.text_field :description%>
+	<%= f.label :price%>
+	<%= f.text_field :price%>
+	<br>
+	<%= f.label :rooms%>
+	<%= f.number_field :rooms%>
 	<br>
 	<%= f.label :capacity%>
-	<%= f.text_field :capacity%>
+	<%= f.number_field :capacity%>
 	<br>
+	<%= f.label :available%>
+	<%= f.check_box :available%>
+	<br>
+
 	
 	<% if @listing.new_record? %>
 			<%= f.submit'Create' %>
