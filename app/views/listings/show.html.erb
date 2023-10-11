@@ -1,16 +1,30 @@
 <h1>Selected Listing</h1>
 <h3>Title: <%= @listing.title%></h3>
-<p><%= @listing.description%></p>
-<p><%= @listing.property_type%></p>
-<p><%= @listing.location%></p>
-<p><%= @listing.price%></p>
-<p><%= @listing.rooms%></p>
-<p><%= @listing.capacity%></p>
-<p><%= @listing.available%></p>
+<p>Description: <%= @listing.description%></p>
+<p>Property type: <%= @listing.property_type%></p>
+<p>Location: <%= @listing.location%></p>
+<p>Price: RM <%= @listing.price%></p>
+<p>Rooms: <%= @listing.rooms%></p>
+<p>Capacity: <%= @listing.capacity%></p>
+<p>Availability: <%= @listing.available%></p>
 
 <%if current_user == @listing.user%>
 	<%= link_to 'Edit', edit_listing_path(@listing)%><br>
 	<%= link_to 'Delete Listing', listing_path(@listing),
 		data: {turbo_method: :delete,
-		turbo_confirm: "Are you sure?"}%>
+		turbo_confirm: "Are you sure?"}%><br><br>	
 <%end%>
+<%= link_to 'New Booking', new_booking_path(listing_id: @listing.id)%><br>
+
+<h2>Reviews</h2>
+
+<%if @listing.reviews.any?%>
+	<% @listing.reviews.each do |review|%>
+	<%= review.comment%><br>
+	<%= review.user.email%><br>
+	<%= review.created_at%><br>
+	<%end%>
+<%else%>
+<p>No reviews.</p>
+<%end%>
+<%= link_to 'Create review', new_review_path(listing_id: @listing.id)%><br>

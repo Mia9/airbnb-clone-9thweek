@@ -3,10 +3,10 @@
 	<% @listings.each do |listing|%>
 		<%= link_to listing_path(listing) do%>
 		<%= listing.title %>
-		<%end%>
+		<%end%><br>
 	<%end%>
 <%else%>
 	<p>No listings found.</p>
-<%end%>
+<%end%><br>
 
 <%= link_to 'Create new listing', new_listing_path(@listings)%>
