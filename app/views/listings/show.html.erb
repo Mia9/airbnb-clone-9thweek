@@ -19,11 +19,16 @@
 <h2>Reviews</h2>
 
 <%if @listing.reviews.any?%>
-	<% @listing.reviews.each do |review|%>
-	<%= review.comment%><br>
-	<%= review.user.email%><br>
-	<%= review.created_at%><br>
-	<%end%>
+	<ul>
+		<li>
+			<% @listing.reviews.each do |review|%>
+			<%= review.comment%><br>
+			<%= review.user.email%><br>
+			Rating: <%= review.rating%>/5 			
+			<%= review.created_at%><br>
+			<%end%>
+		</li>
+	</ul>	
 <%else%>
 <p>No reviews.</p>
 <%end%>

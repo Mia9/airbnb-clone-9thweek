@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
 
 	def create
 		@listing = Listing.find_by(id: params[:review][:listing_id])
-		@review = current_user.reviews.create(comment: params[:review][:comment],
+		@review = current_user.reviews.create(comment: params[:review][:comment], rating: params[:review][:rating],
 					reviewable_id: @listing.id, reviewable_type: @listing.class)
 		if @review.save
 			redirect_to listing_path(@listing)
