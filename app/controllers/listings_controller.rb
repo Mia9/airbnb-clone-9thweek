@@ -1,25 +1,25 @@
 class ListingsController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:index]
 	before_action :set_listing, only: [:show, :edit, :update, :destroy]
 
-	def index
-		@listings = Listing.all
-	end
+	# def index #---move to pages controller
+	# 	@listings = Listing.all
+	# end
 
 	def new
 		@listing = Listing.new
 	end
 
-	def create
-		@listing = current_user.listings.create(listing_params)
-		if @listing.save
-			redirect_to listings_path(@listings)
-		else
-			render :end
-		end
-	end
+	# def create
+	# 	@listing = current_user.listings.create(listing_params)
+	# 	if @listing.save
+	# 		redirect_to listings_path(@listings)
+	# 	else
+	# 		render :end
+	# 	end
+	# end
 
-	def show
+	def show		
 	end
 
 	def edit

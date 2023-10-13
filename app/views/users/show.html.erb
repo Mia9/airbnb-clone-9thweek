@@ -1,0 +1,41 @@
+<h1>User Dashboard of <%= @user.email%></h1>
+
+<%if user_signed_in? && current_user != @user%>
+	<h2>Rate this user.</h2>
+	<%= link_to 'Create user review', new_review_path(user_id: @user.id)%><br>
+<%else%>
+	<h3>Bookings</h3>
+	<%if @user.bookings.any?%>
+	<ul>
+	<% @user.bookings.each do |booking|%>
+		<li>
+		Property Name: <%= booking.listing.title%><br>
+		Check In Date: <%= booking.check_in%><br>
+		Check Out Date: <%= booking.check_out%><br>
+		Duration: <%= booking.duration%><br>
+		Total Price: RM <%= booking.total_price%>
+		<%end%>
+		</li>
+	</ul>
+	<%else%>
+		<p>No bookings found.</p>
+	<%end%>
+<%end%>
+
+<h3>User Profile Reviews</h3>
+<%if @user.reviews.any?%>
+<ul>	
+	<% @user.reviews.each do |review|%>
+	<li>
+		<%= review.comment%><br>
+		<%= review.user.email%><br>
+		Rating: <%= review.rating%>/5 			
+		<%= review.created_at%><br>
+		<%end%>
+	</li>
+</ul>	
+<%else%>
+<p>No reviews.</p>
+<%end%>
+
+

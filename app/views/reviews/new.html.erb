@@ -1,9 +1,23 @@
-<h1>New Review Here <%= @listing.title%></h1>
-<%= form_with model: @review do |f|%>
-	<%= f.label :comment%><br>
-	<%= f.text_area :comment%>
-	<%= f.label :rating%><br>
-	<%= f.number_field :rating, min: 1, max: 5%>
-	<%= f.hidden_field :listing_id, value: @listing.id%>
-	<%= f.submit 'Create'%>
+<%if user_signed_in? && current_user != @user && !@listing %> 
+	<h3>Review this user <%= @user.email%></h3>
+	<%= form_with model: @review do |f|%>
+		<%= f.label :comment%><br>
+		<%= f.text_area :comment%>
+		<%= f.label :rating%><br>
+		<%= f.number_field :rating, min: 1, max: 5%>
+		<%= f.hidden_field :user_id, value: @user.id%>
+		<%= f.submit 'Create'%>
+	<%end%>
+<%else%>
+	<% @listing_id%>
+
+	<h1>Listing New Review Here <%= @listing.title%></h1>
+	<%= form_with model: @review do |f|%>
+		<%= f.label :comment%><br>
+		<%= f.text_area :comment%>
+		<%= f.label :rating%><br>
+		<%= f.number_field :rating, min: 1, max: 5%>
+		<%= f.hidden_field :listing_id, value: @listing.id%>
+		<%= f.submit 'Create'%>
+	<%end%>
 <%end%>

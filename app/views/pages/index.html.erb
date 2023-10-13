@@ -1,10 +1,37 @@
-<h1>Hello <%= current_user.email%></h1>
+
+
+<p>---------------------------------------------------------------------</p>
 <h1>Welcome to Airbnb</h1>
 <%if user_signed_in?%>
- <%= current_user.name%>
- <%= button_to 'Logout', destroy_user_session_path, method: :delete%>
+	<h2>Hello <%= current_user.email%></h2>
+	<%= link_to 'Dashboard', user_path(current_user)%>
+	<%= button_to 'Logout', destroy_user_session_path, method: :delete%>
 <%else%>
- <%= link_to 'Login', new_user_session_path%>
+ 	<%= link_to 'Login', new_user_session_path%>
 <%end%>
 
-<%= link_to 'Listings', listings_path(@listings)%>
+<!-- <%#= link_to 'Listings', listings_path(@listings)%> -->
+
+<h3>Testing display all Listings on homepage</h3>
+<%= form_tag(root_path, method: :get) do%>
+	<%= text_field_tag :location, params[:location], placeholder: 'Enter location'%>
+	<%= date_field_tag :check_in, params[:check_in]%>
+	<%= date_field_tag :check_out, params[:check_out]%>
+	<%= submit_tag 'Search'%>
+<%end%>
+<ul>
+<%if @listings.any?%>
+	
+	<% @listings.each do |listing|%>
+	<li>
+		<%= link_to listing_path(listing) do%>
+		<%= listing.title %>
+		<%end%><br>
+	<%end%>
+	</li>
+</ul>
+<%else%>
+	<p>No listings found.</p>
+<%end%><br>
+
+<%= link_to 'Create new listing', new_listing_path(@listings)%>
