@@ -19,7 +19,8 @@ class ListingsController < ApplicationController
 		end
 	end
 
-	def show		
+	def show
+		@review = Review.new  #---to make new review under listing page		
 	end
 
 	def edit

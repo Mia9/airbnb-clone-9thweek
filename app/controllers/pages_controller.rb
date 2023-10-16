@@ -1,12 +1,14 @@
 class PagesController < ApplicationController
 	def index
+		available_listings = Listing.available_only
+
 		if params[:check_in].blank? and params[:check_out].blank? and params[:location].blank?
-			@listings = Listing.all
+			@listings = available_listings.all
 		else
 			if params[:location].present?
-				@listings = Listing.where(location: params[:location])
+				@listings = available_listings.where(location: params[:location])
 			else
-				@listings = Listing.all
+				@listings = available_listings.all
 			end
 
 			if params[:check_in].present? and params[:check_out].present?

@@ -7,21 +7,6 @@
  	<%= link_to 'Login', new_user_session_path%>
 <%end%>
 
-
-<div class="dropdown">
-  <h3 class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-    <%= current_user.email%>
-  </h3>
-
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-  <%if user_signed_in?%>
-    <li><%= link_to 'Dashboard', user_path(current_user)%></li>
-    <li><%= button_to 'Logout', destroy_user_session_path, method: :delete%></li>
-  <%else%> 
-    <li><%= link_to 'Login', new_user_session_path%></li>
-  </ul>
-</div>
-
 #-----------------Before bootstrap styling
 <ul>
 <%if @listings.any?%>	
@@ -40,3 +25,23 @@
 	<p>No listings found.</p>
 <%end%><br>
 #------------------------------
+from user show.html.erb page
+
+<h3>User Profile Reviews</h3>
+<%if @user.reviews.any?%>
+<div class="row row-cols-auto px-2">	
+	<% @user.reviews.each do |review|%>
+	<div class="col-md-2" > 
+		<div class="card border-success h-100 mb-3" style="width: 13rem;">
+			<%= review.comment%><br>
+			Rating: <%= review.rating%>/5 			
+			<%= review.created_at%><br>
+			<%= review.user.email%>				
+		</div>				
+	</div>
+	<%end%>
+</div>
+<%else%>
+<p>No reviews.</p>
+<%end%>
+

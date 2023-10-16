@@ -1,0 +1,9 @@
+<%= form_with model: @review, remote: true, data: { controller: 'form-reset', action: 'turbo:submit-end->form-reset#reset'} do |f|%>
+	
+	<%= f.text_area :comment, placeholder: "Write comment here"%>
+	<%= f.label :rating%><br>
+	<%= f.number_field :rating, min: 1, max: 5%>
+	<%= f.hidden_field :listing_id, value: @listing.id%>
+	<%= f.submit 'Create'%>
+<%end%>
+

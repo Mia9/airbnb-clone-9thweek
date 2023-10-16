@@ -31,19 +31,21 @@
 	<%= link_to 'Create review', new_review_path(listing_id: @listing.id)%><br>
 <%end%>
 
-<h2>Property Reviews</h2>
+----------------------------------------------------------------------------------
 
-<%if @listing.reviews.any?%>
+<!-- review form here for stimuls and turbo -->
+<h4 class="text-danger"><%= @listing.title%> Reviews</h4>
+<%#= render 'reviews/review_form'%>
+<%= turbo_frame_tag "review_form" do%>
+	<%= render "reviews/review_form" %>
+	<%if @listing.reviews.any?%>
 	<ul>		
 		<% @listing.reviews.each do |review|%>
-		<li>
-			<%= review.comment%><br>
-			<%= review.user.email%><br>
-			Rating: <%= review.rating%>/5 			
-			<%= review.created_at%><br>
-			<%end%>
-		</li>
+			<section id="review">
+				<%= render "reviews/review", review: review %>
+			</section>
+		<%end%>
 	</ul>	
-<%else%>
-<p>No reviews.</p>
+	<%end%>	
 <%end%>
+		

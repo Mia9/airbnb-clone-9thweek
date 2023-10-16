@@ -23,23 +23,25 @@
 		<p>No bookings found.</p>
 	<%end%>
 <%end%>
-
-<h3>User Profile Reviews</h3>
-<%if @user.reviews.any?%>
-<div class="row row-cols-auto px-2">	
-	<% @user.reviews.each do |review|%>
+<br>
+<br>
+<%if @user.listings.any?%>
+<div class="row row-cols-auto px-2">
+	<% @user.listings.each do |listing|%>
 	<div class="col-md-2" > 
-		<div class="card border-success h-100 mb-3" style="width: 13rem;">
-			<%= review.comment%><br>
-			Rating: <%= review.rating%>/5 			
-			<%= review.created_at%><br>
-			<%= review.user.email%>				
-		</div>				
+		<div class="card border-danger h-100 mb-3" style="width: 13rem;">
+		<%= link_to listing_path(listing) do%>
+			<%if listing.photos.attached?%>					
+				<%= image_tag listing.photos.first, width: 200, height: 200 %>
+			<%end%>				
+			  <div class="card-body">
+			    <p class="card-text"><%= listing.title %></p>
+			  </div>
+		</div>
+		<%end%>
 	</div>
-	<%end%>
-</div>
-<%else%>
-<p>No reviews.</p>
+		
+	<%end%>	
+</div>	
+	
 <%end%>
-
-
