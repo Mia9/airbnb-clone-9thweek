@@ -1,7 +1,13 @@
-<h1>Selected Listing</h1>
-<h3>Title: <%= @listing.title%></h3>
+<h2>Property: <%= @listing.title%></h2>
 	<ul>
-		<li>		
+		<li>
+<%if @listing.photos.attached? %>
+		<% @listing.photos.each do |photo|%>
+			<%= link_to rails_blob_path(photo, disposition: "attachment") do %>	
+			<%end%>
+		<%= image_tag photo, width: 200, height: 200 %>		
+		<%end%>
+<%end%><br>
 	Description: <%= @listing.description%><br>
 	Property type: <%= @listing.property_type%><br>
 	Location: <%= @listing.location%><br>

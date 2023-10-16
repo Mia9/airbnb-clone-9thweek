@@ -2,6 +2,9 @@
 	<%= f.label :title %>
 	<%= f.text_field :title%>
 	<br>
+	<%= f.label :photos%>
+	<%= f.file_field :photos, multiple: true%>
+	<br>
 	<%= f.label :description%>
 	<%= f.text_field :description%>
 	<br>

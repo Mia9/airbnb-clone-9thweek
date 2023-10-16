@@ -1,4 +1,6 @@
 class BookingsController < ApplicationController
+	before_action :authenticate_user!
+
 	def new
 		@listing = Listing.find_by(id: params[:listing_id])
 		@booking = Booking.new

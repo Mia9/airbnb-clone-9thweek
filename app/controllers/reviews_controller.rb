@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+	before_action :authenticate_user!
 	def new
 		# if current_user coming from user dashboard page
 		if @user = User.find_by(id: params[:user_id])

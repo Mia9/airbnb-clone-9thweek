@@ -1,0 +1,42 @@
+<h1>Welcome to Airbnb</h1> ----from index.html.erb
+<%if user_signed_in?%>
+	<h2>Hello <%= current_user.email%></h2>
+	<%= link_to 'Dashboard', user_path(current_user)%>
+	<%= button_to 'Logout', destroy_user_session_path, method: :delete%>
+<%else%>
+ 	<%= link_to 'Login', new_user_session_path%>
+<%end%>
+
+
+<div class="dropdown">
+  <h3 class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= current_user.email%>
+  </h3>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+  <%if user_signed_in?%>
+    <li><%= link_to 'Dashboard', user_path(current_user)%></li>
+    <li><%= button_to 'Logout', destroy_user_session_path, method: :delete%></li>
+  <%else%> 
+    <li><%= link_to 'Login', new_user_session_path%></li>
+  </ul>
+</div>
+
+#-----------------Before bootstrap styling
+<ul>
+<%if @listings.any?%>	
+	<% @listings.each do |listing|%>
+	<li>
+		<%= link_to listing_path(listing) do%>
+			<%if listing.photos.attached?%>
+					<%= listing.title %><br>
+					<%= image_tag listing.photos.first, width: 150, height: 150 %>
+			<%end%>		
+		<%end%><br>
+	<%end%>
+	</li>
+</ul>
+<%else%>
+	<p>No listings found.</p>
+<%end%><br>
+#------------------------------
