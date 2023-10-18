@@ -2,7 +2,7 @@ set :stage,           :production
 set :rails_env,       :production
 set :branch,          :main
 
-set :application,     "airbnbclone"
+set :application,     "airbnb-clone-9thweek"
 set :deploy_to,       "/home/#{fetch(:user)}/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/sockets/puma.sock"
 
