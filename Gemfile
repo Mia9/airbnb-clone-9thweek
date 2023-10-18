@@ -48,3 +48,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
+# from deploy error missing ed25519
+ gem 'ed25519', '< 2.0'
+ gem 'bcrypt_pbkdf', '< 2.0'
